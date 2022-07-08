@@ -9,7 +9,6 @@
 
 return [
     'admins' => [
-        'admin@admin.com',
-        'paulo.devweb@gmail.com',
+        'admin@gsupport.online',
     ]
 ];

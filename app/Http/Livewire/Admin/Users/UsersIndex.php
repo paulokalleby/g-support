@@ -31,6 +31,7 @@ class UsersIndex extends Component
     public function render()
     {
         $users = User::where('name', 'like', '%' . $this->name . '%')
+            ->where('email', '!=', 'admin@gsupport.online')
             ->where('active', 'like', '%' . $this->status . '%')
             ->orderBy('name', 'ASC')
             ->paginate($this->pages);
