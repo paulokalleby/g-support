@@ -43,7 +43,7 @@ class UsersCreate extends Component
         $this->validate([
             'locality'   => ['required', 'exists:localities,id', 'uuid'],
             'department' => ['required', 'exists:departments,id', 'uuid'],
-            'name'       => ['required', 'string', 'max:50'],
+            'name'       => ['required', 'string','min:3', 'max:50'],
             'email'      => ['required', 'string', 'max:120', 'email', "unique:users,email"],
             'password'   => ['required', 'same:confirm', 'min:8', 'max:16'],
             'confirm'    => ['required', 'same:password'],

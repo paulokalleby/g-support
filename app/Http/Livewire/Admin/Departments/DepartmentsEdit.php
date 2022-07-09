@@ -37,7 +37,7 @@ class DepartmentsEdit extends Component
 
             $department = Department::find($this->uuid);
 
-            $this->validate(['name' => ['required', 'max:50']]);      
+            $this->validate(['name' => ['required', 'min:3', 'max:50']]);      
             
             $update = $department->update([
                 'name'   => $this->name,

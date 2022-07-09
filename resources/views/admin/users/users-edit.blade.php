@@ -13,7 +13,7 @@
             </div>
         </div>
 
-        <div class="modal-body mb-0 pb-0 pt-1">
+        <div class="modal-body mb-0 pb-0 pt-0">
 
             <div class="form-group mb-2">
                 <label for="" class="form-control-label">Nome</label>
@@ -53,6 +53,29 @@
                             @endforeach
                         </select>
                         @error('department')
+                            <small class="form-text text-danger">{{ $message }}</small>
+                        @enderror
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="form-group mb-2">
+                        <label for="" class="form-control-label">Senha</label>
+                        <input type="password" class="form-control form-control-muted" placeholder="Senha" wire:model.defer="password">
+                        @error('password')
+                            <small class="form-text text-danger">{{ $message }}</small>
+                        @enderror
+                    </div>
+                </div>
+
+                <div class="col-lg-6">
+                    <div class="form-group mb-2">
+                        <label for="" class="form-control-label">Confirmar</label>
+                        <input type="password" class="form-control form-control-muted" placeholder="Confirmar Senha"
+                            wire:model.defer="confirm">
+                        @error('confirm')
                             <small class="form-text text-danger">{{ $message }}</small>
                         @enderror
                     </div>

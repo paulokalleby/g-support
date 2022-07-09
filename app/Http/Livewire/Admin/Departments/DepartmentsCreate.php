@@ -28,7 +28,7 @@ class DepartmentsCreate extends Component
     public function store()
     {
         $this->validate([
-            'name' => ['required', 'max:50'],
+            'name' => ['required','min:3', 'max:50'],
         ]);
         
         Department::create(['name'   => $this->name]);

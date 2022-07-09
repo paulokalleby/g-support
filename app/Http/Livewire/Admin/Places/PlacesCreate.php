@@ -29,7 +29,7 @@ class PlacesCreate extends Component
     public function store()
     {
         $this->validate([
-            'name' => ['required', 'min:2','max:50'],
+            'name' => ['required','min:3','max:50'],
             'description' => ['nullable', 'max:255'],
         ]); 
         

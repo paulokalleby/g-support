@@ -18,6 +18,8 @@ class UsersEdit extends Component
     public $locality;
     public $department;
     public $technician;
+    public $password;
+    public $confirm;
     public $active;
 
     protected $listeners = ['$refresh', 'setEditUser',];
@@ -41,6 +43,7 @@ class UsersEdit extends Component
         $this->locality   = $user->locality_id;
         $this->department = $user->department_id;
         $this->technician = $user->technician;
+        $this->password   = '';
         $this->active     = $user->active;
     }
 
@@ -54,18 +57,36 @@ class UsersEdit extends Component
             $this->validate([
                 'locality'   => ['required', 'exists:localities,id', 'uuid'],
                 'department' => ['required', 'exists:departments,id', 'uuid'],
-                'name'       => ['required', 'string', 'max:50'],
+                'name'       => ['required', 'string','min:3', 'max:50'],
                 'email'      => ['required', 'string', 'max:120', 'email', "unique:users,email,{$this->uuid},id"],
+                'password'   => ['nullable', 'same:confirm', 'min:6', 'max:16'],
+                'confirm'    => ['nullable', 'same:password'],
             ]);
 
-            $update = $user->update([
-                'name'          => $this->name,
-                'email'         => $this->email,
-                'locality_id'   => $this->locality,
-                'department_id' => $this->department,
-                'technician'    => $this->technician,
-                'active'        => $this->active,
-            ]);
+            if ($this->password != '') {
+
+                $update = $user->update([
+                    'name'          => $this->name,
+                    'email'         => $this->email,
+                    'locality_id'   => $this->locality,
+                    'department_id' => $this->department,
+                    'technician'    => $this->technician,
+                    'password'      => bcrypt($this->password),
+                    'active'        => $this->active,
+                ]);
+
+            } else {
+
+                $update = $user->update([
+                    'name'          => $this->name,
+                    'email'         => $this->email,
+                    'locality_id'   => $this->locality,
+                    'department_id' => $this->department,
+                    'technician'    => $this->technician,
+                    'active'        => $this->active,
+                ]);
+
+            }
 
             if ($update) {
 

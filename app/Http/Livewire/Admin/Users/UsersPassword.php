@@ -36,7 +36,7 @@ class UsersPassword extends Component
             $user = User::find($this->uuid);
 
             $this->validate([
-                'password' => ['required', 'same:confirm', 'min:8', 'max:16'],
+                'password' => ['required', 'same:confirm', 'min:6', 'max:16'],
                 'confirm'  => ['required', 'same:password'],
             ]);
 
