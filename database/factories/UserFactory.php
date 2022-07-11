@@ -23,7 +23,7 @@ class UserFactory extends Factory
             'locality_id' => Locality::factory()->create(),
             'department_id' => Department::factory()->create(),
             'name' => 'Administrador',
-            'email' => 'admin@gsupport.online',
+            'email' => 'suporte@app-chamados.online',
             'email_verified_at' => now(),
             'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
             'remember_token' => Str::random(10),

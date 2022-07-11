@@ -77,14 +77,9 @@
                 </div>
             </div>
 
-            @if (session()->has('message'))
-                <p class="text-success">{{ session('message') }}</p>
-            @endif
-
-
         </div>
 
-        <div class="modal-footer pt-0 mt-0 text-right">
+        <div class="modal-footer pt-0 mt-0">
 
             <button type="button" wire:click.prevent="clear" class="btn btn-outline-primary"
                 data-dismiss="modal">
