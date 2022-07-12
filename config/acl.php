@@ -9,6 +9,6 @@
 
 return [
     'admins' => [
-        'suporte@app-chamados.online',
+        'admin@app-chamados.online',
     ]
 ];
