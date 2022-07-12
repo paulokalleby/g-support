@@ -2,12 +2,12 @@
     <div class="modal-content" method="post">
 
         <div class="modal-header bg-danger">
-            <h6 class="modal-title text-white" id="modal-title-default">Excluir registro</h6>
+            <h6 class="modal-title text-white" id="modal-title-default">Atenção</h6>
         </div>
-
+          
         <div class="modal-body py-0">
-            <p>Deseja excluir o item?</p>
-            <p>UUID : <b>{{ $uuid }}</b></p>
+            <p>Deseja excluir o item  de UUID?</p>
+            <p><b>{{ $uuid }}</b></p>
         </div>
 
         <div class="modal-footer pt-0 mt-0">

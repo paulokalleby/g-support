@@ -55,10 +55,11 @@ Route::prefix('auth')
                 ->middleware('guest');
 
 
+        /*
         Route::get('/register', Register::class)
                 ->name('auth.register')
                 ->middleware('guest');
-
+        */
 
         Route::get('/forgot-password', ForgotPassword::class)
                 ->name('password.forgot')

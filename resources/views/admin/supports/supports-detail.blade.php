@@ -2,13 +2,13 @@
     <div class="modal-content">
 
         <div class="modal-header">
-            <h6 class="modal-title" id="modal-title-default">Nº #{{ $identify }}</h6>
+            <h6 class="modal-title" id="modal-title-default">Nº {{ $identify }}</h6>
             <button type="button" wire:click.prevent="clear" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">×</span>
             </button>
         </div>
 
-        <div class="modal-body mb-0 py-0 px-3">
+        <div class="modal-body mb-0 pt-0 pb-3 px-3">
 
             <div class="flex-column align-items-start py-2 px-2">
                 <div class="d-flex w-100 justify-content-between">
@@ -31,9 +31,9 @@
                     <div class="d-flex w-100 justify-content-between">
                         <div>
                             <div class="d-flex w-100 align-items-center">
-                                <img src="{{ orImage($avatar_r, 'avatar.jpg') }}" alt="Image placeholder"
+                                <img src="{{ orImage($avatar_a, 'avatar.jpg') }}" alt="Image placeholder"
                                     class="avatar avatar-xs mr-2" />
-                                <h5 class="mb-1">{{ $requester }}</h5>
+                                <h5 class="mb-1">{{ $attendance }}</h5>
                             </div>
                         </div>
                         <small>{{ dateTimeToBr($updated) }}</small>
@@ -43,28 +43,65 @@
                     @endif
                 </div>
             @endif
-            <p>
+            <p class="ml-2">
                 @if ($status == 'pending')
-                    <span class="badge badge-pill badge-warning badge-lg">
+                    <span class="badge badge-pill badge-warning">
                         {{ config('enums.status')[$status] }}
                     </span>
                 @elseif($status == 'attending')
-                    <span class="badge badge-pill badge-info badge-lg">
+                    <span class="badge badge-pill badge-info">
                         {{ config('enums.status')[$status] }}
                     </span>
                 @elseif($status == 'solved')
-                    <span class="badge badge-pill badge-success badge-lg">
+                    <span class="badge badge-pill badge-success">
                         {{ config('enums.status')[$status] }}
                     </span>
                 @elseif($status == 'canceled')
-                    <span class="badge badge-pill badge-danger badge-lg">
+                    <span class="badge badge-pill badge-danger">
                         {{ config('enums.status')[$status] }}
                     </span>
                 @endif
             </p>
 
+            @if($status == 'attending' && $attendance_id == auth()->user()->id)
+            <div class="form-group mx-2 mb-0">
+                <label for="" class="form-control-label">Informe a solução</label>
+                <textarea class="form-control form-control-muted" style="resize: none" rows="3" wire:model.defer="solution"
+                    placeholder="Descreva o procedimento realizado"></textarea>
+                @error('solution')
+                    <small class="form-text text-danger">{{ $message }}</small>
+                @enderror
+            </div>
+            @endif
 
         </div>
+
+        @if( auth()->user()->technician == 1)
+        <div class="modal-footer pt-0 mt-0">
+
+            <button type="button" wire:click.prevent="clear" class="btn btn-outline-primary"
+                data-dismiss="modal">
+                Fechar
+            </button>
+
+            @if($status == 'pending')
+            <button type="button" wire:loading.attr="disabled" wire:click.prevent="toMeet"
+                class="btn btn-primary ml-auto">
+                Atender
+                <i wire:loading wire:target="toMeet" class="fas fa-spinner fa-pulse"></i>
+            </button>
+            @endif
+
+            @if($status == 'attending' && $attendance_id == auth()->user()->id)
+            <button type="button" wire:loading.attr="disabled" wire:click.prevent="finishing"
+                class="btn btn-primary ml-auto">
+                Finalizar
+                <i wire:loading wire:target="finishing" class="fas fa-spinner fa-pulse"></i>
+            </button>
+            @endif
+
+        </div>
+        @endif
 
     </div>
 </div>

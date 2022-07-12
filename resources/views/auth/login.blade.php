@@ -61,8 +61,7 @@
                                     </button>
 
                                     <small>
-                                        <a href="{{ route('password.forgot') }}">Esqueceu a senha?</a> |
-                                        <a href="{{ route('auth.register') }}">Registrar-se</a>
+                                        <a href="{{ route('password.forgot') }}">Esqueceu a senha?</a>
                                     </small>
 
                                     @if (session()->has('message'))
