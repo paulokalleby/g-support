@@ -47,4 +47,9 @@ class Called extends Model
     {
         return $this->belongsTo(\App\Models\User::class);
     }
+
+    public function timelines()
+    {
+        return $this->hasMany(\App\Models\Timeline::class);
+    }
 }

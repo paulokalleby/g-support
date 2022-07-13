@@ -18,6 +18,11 @@ class PermissionSeeder extends Seeder
     {
         
         Permission::create([
+            'name' => 'Dashboards',
+            'slug' => 'dashboards'
+        ]);
+
+        Permission::create([
             'name' => 'Chamados',
             'slug' => 'supports'
         ]);

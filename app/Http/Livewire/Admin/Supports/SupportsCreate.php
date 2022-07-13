@@ -65,13 +65,19 @@ class SupportsCreate extends Component
         
         $identify = ( Called::count() + 1 );
         
-        Called::create([
+        $called = Called::create([
             'category_id'  => $this->category,
             'requester_id' => $this->requester ?? '',
             'identify'     => $identify,
             'title'        => $this->title,
             'problem'      => $this->problem,
             'status'       => 'pending',
+        ]);
+
+        $called->timelines()->create([
+            'label' => 'Aberto',
+            'icon'  => 'fa-comment-alt',
+            'color' => 'warning',
         ]);
 
         $this->emitTo('admin.supports.supports-index', '$refresh');
