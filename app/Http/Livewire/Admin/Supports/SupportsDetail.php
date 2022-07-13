@@ -41,7 +41,7 @@ class SupportsDetail extends Component
     {
 
         $this->called    = Called::with('requester','attendance')->whereId($uuid)->first();
-        $this->timelines = Timeline::where('called_id', $uuid)->orderByDesc('created_at')->get();
+        $this->timelines = Timeline::where('called_id', $uuid)->orderBy('created_at')->get();
 
         $this->requester     = $this->called->requester->name;
         $this->avatar_r      = $this->called->requester->avatar;
