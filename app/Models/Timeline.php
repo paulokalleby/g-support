@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use Carbon\Carbon;
 use App\Traits\UuidTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -22,10 +21,12 @@ class Timeline extends Model
         'created_at',
     ];
 
+    /*
     public function getCreatedAtAttribute($attr)
     {
         return Carbon::make($attr)->format('d/m/Y H:i:s');
     }
+    */
 
     public function called()
     {

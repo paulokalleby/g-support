@@ -1,8 +1,7 @@
 <?php
 
-use App\Models\Order;
+use Carbon\Carbon;
 use App\Models\Setting;
-use App\Models\User;
 use Illuminate\Support\Facades\Storage;
 
 function settings($param = null)
@@ -34,45 +33,12 @@ function orImage($image, $option)
 
 }
 
-function price($value)
-{
-    return number_format($value, 2, ',','.');
-}
-
 function dateToBr($date)
 {
-    return date('d/m/Y', strtotime($date));
+    return Carbon::make($date)->format('d/m/Y');
 }
 
 function dateTimeToBr($date)
 {
-    return date('d/m/Y H:m', strtotime($date));
-}
-
-function mask($mask,$str){
-
-    $str = str_replace(" ","",$str);
-
-    for($i=0;$i<strlen($str);$i++){
-        $mask[strpos($mask,"#")] = $str[$i];
-    }
-
-    return $mask;
-
-}
-
-function isPermission($uuid, $permission) {
-
-    $user = User::with('permissions')->find($uuid);
-
-    if ($user->permissions->where('slug', $permission)->first()) {
-
-        echo 'SIM';
-
-    } else {
-
-        echo 'NO';
-
-    }
-
+    return Carbon::make($date)->format('d/m/Y H:i:s');
 }

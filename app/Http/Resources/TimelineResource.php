@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources;
 
+use Carbon\Carbon;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class TimelineResource extends JsonResource
@@ -18,7 +19,7 @@ class TimelineResource extends JsonResource
             'label' => $this->label,
             'icon'  => $this->icon,
             'color' => $this->color,
-            'date'  => $this->created_at,
+            'date'  => Carbon::make($this->created_at)->format('Y-m-d H:i:s'),
         ];
     }
 }

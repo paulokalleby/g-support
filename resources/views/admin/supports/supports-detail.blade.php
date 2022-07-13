@@ -103,7 +103,7 @@
                                         {{--<small class="text-muted"><i class="fas fa-clock mr-1"></i>2 hrs ago</small>--}}
                                     </div>
                                 </div>
-                                <h6 class="text-sm mt-1 mb-0">{{ $v->created_at }}</h6>
+                                <h6 class="text-sm mt-1 mb-0">{{ dateTimeToBr($v->created_at) }}</h6>
                             </div>
                         </div>
                         @endforeach
