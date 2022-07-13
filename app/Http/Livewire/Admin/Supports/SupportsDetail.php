@@ -17,6 +17,7 @@ class SupportsDetail extends Component
     public $uuid;
     public $identify = 0;
     public $requester = '';
+    public $whatsapp = '';
     public $avatar_r = '';
     public $attendance_id = '';
     public $attendance = '';
@@ -44,6 +45,7 @@ class SupportsDetail extends Component
         $this->timelines = Timeline::where('called_id', $uuid)->orderBy('created_at')->get();
 
         $this->requester     = $this->called->requester->name;
+        $this->whatsapp      = $this->called->requester->cell;
         $this->avatar_r      = $this->called->requester->avatar;
         $this->attendance_id = $this->called->attendance_id ?? '';
         $this->attendance    = $this->called->attendance->name ?? '';
