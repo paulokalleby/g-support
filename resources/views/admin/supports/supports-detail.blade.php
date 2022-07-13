@@ -22,9 +22,9 @@
                                     <h5 class="mb-1">{{ $requester }}</h5>
                                 </div>
                             </div>
-                            <small>
-                                <a class="text-success" href="https://api.whatsapp.com/send?1=pt_BR&phone=555{{ $whatsapp }}&text=Chamado:%20{{ $identify }}" target="_blank"><i class="fab fa-whatsapp"></i></a>
-                            </small>
+                            <a class="text-success" href="https://api.whatsapp.com/send?1=pt_BR&phone=555{{ $whatsapp }}&text=Chamado:%20{{ $identify }}" target="_blank">
+                                <i class="fab fa-whatsapp"></i>
+                            </a>
                         </div>
                         <h4 class="mt-3 mb-1">{{ $title }}</h4>
                         <p class="text-sm mb-0">{{ $problem }}</p>

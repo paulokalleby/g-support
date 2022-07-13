@@ -79,7 +79,7 @@
                                         <small class="form-text text-danger">{{ $message }}</small>
                                     @enderror
                                 </div>
-                                <div class="form-group">
+                                <div class="form-group mb-2 mt-0">
                                     <label for="" class="form-control-label">Email</label>
                                     <input type="text" class="form-control form-control-muted" placeholder="Email"
                                         wire:model.defer="email">
@@ -88,9 +88,19 @@
                                     @enderror
                                 </div>
 
-                                @if (session()->has('message-profile'))
-                                    <p class="text-success">{{ session('message-profile') }}</p>
-                                @endif
+                                <div class="row">
+                                    <div class="col-lg-4">
+                                        <div class="form-group mb-3 mt-0" x-data x-init="$($refs.cell).mask('(00) 00000-0000')">
+                                            <label for="" class="form-control-label">Celular</label>
+                                            <input x-ref="cell" x-on:change="$dispatch('cell', $event.target.value)"
+                                                class="form-control form-control-muted" placeholder="Celular"
+                                                wire:model.defer="cell">
+                                            @error('cell')
+                                                <small class="form-text text-danger">{{ $message }}</small>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                </div>
 
                                 <button type="button" class="btn btn-primary" wire:loading.attr="disabled"
                                     wire:click.prevent="updateProfile">
@@ -137,7 +147,7 @@
                             @enderror
                         </div>
 
-                        <div class="form-group">
+                        <div class="form-group mb-3 mt-0">
                             <label for="" class="form-control-label">Confirmação da Senha</label>
                             <input type="password" class="form-control form-control-muted" wire:model.defer="confirm"
                                 placeholder="Confirmação">
@@ -145,10 +155,6 @@
                                 <small class="form-text text-danger">{{ $message }}</small>
                             @enderror
                         </div>
-
-                        @if (session()->has('message-password'))
-                            <p class="text-success">{{ session('message-password') }}</p>
-                        @endif
 
                         <button type="button" class="btn btn-primary" wire:loading.attr="disabled"
                             wire:click.prevent="updatePassword">
@@ -202,3 +208,7 @@
         </div>
     </div>
 </div>
+
+@push('component-scripts')
+    <script src="{{ asset('/vendor/jquery-mask/jquery.mask.min.js') }}"></script>
+@endpush

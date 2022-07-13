@@ -21,6 +21,7 @@ class ProfileIndex extends Component
     public $avatar;
     public $photo;
     public $user;
+    public $cell;
     public $technician;
 
     public function mount()
@@ -36,6 +37,7 @@ class ProfileIndex extends Component
         $this->name       = $this->user->name;
         $this->email      = $this->user->email;
         $this->avatar     = $this->user->avatar;
+        $this->cell       = $this->user->cell;
         $this->technician = $this->user->technician;
         $this->password   = '';
         $this->confirm    = '';
@@ -57,11 +59,13 @@ class ProfileIndex extends Component
                 'email', 
                 "unique:users,email,{$this->uuid},id",
             ],
+            'cell'  => ['nullable', 'celular_com_ddd'],
         ]);
 
         $this->user->update([
             'name'  => $this->name,
             'email' => $this->email,
+            'cell'  => $this->cell,
         ]);
 
         $this->emit('$refresh');

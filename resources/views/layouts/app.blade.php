@@ -21,7 +21,7 @@
 
     @livewireStyles
 
-    {{--<script defer src="/js/alpine.min.js"></script>--}}
+    <script defer src="/js/alpine.min.js"></script>
 
 </head>
 
