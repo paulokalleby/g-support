@@ -22,7 +22,7 @@
                                     <h5 class="mb-1">{{ $requester }}</h5>
                                 </div>
                             </div>
-                            <a class="text-success" href="https://api.whatsapp.com/send?1=pt_BR&phone=555{{ $whatsapp }}&text=Chamado:%20{{ $identify }}" target="_blank">
+                            <a class="text-success" href="https://api.whatsapp.com/send?1=pt_BR&phone={{ $whatsapp }}&text=Chamado:%20{{ $identify }}" target="_blank">
                                 <i class="fab fa-whatsapp"></i>
                             </a>
                         </div>
