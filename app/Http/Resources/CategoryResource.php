@@ -17,6 +17,7 @@ class CategoryResource extends JsonResource
         return [
             'id'          => $this->id,
             'name'        => $this->name,
+            'priority'    => config('enums.priority')[$this->priority] ?? 'Not Found Priority',
             'description' => $this->description,
         ];
     }
