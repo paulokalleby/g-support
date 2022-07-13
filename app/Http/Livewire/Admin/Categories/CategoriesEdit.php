@@ -4,6 +4,7 @@ namespace App\Http\Livewire\Admin\Categories;
 
 use App\Models\Category;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
+use Illuminate\Validation\Rule;
 use Livewire\Component;
 
 class CategoriesEdit extends Component
@@ -13,6 +14,7 @@ class CategoriesEdit extends Component
     
     public $uuid;
     public $name;
+    public $priority;
     public $active;
     
     protected $listeners = ['$refresh','setEditCategory'];
@@ -24,9 +26,10 @@ class CategoriesEdit extends Component
 
     public function setEditCategory(Category $category)
     {
-        $this->uuid   = $category->id;
-        $this->name   = $category->name;
-        $this->active = $category->active;
+        $this->uuid     = $category->id;
+        $this->name     = $category->name;
+        $this->priority = $category->priority;
+        $this->active   = $category->active;
     }
     
     public function update()
@@ -37,12 +40,14 @@ class CategoriesEdit extends Component
             $category = Category::whereId($this->uuid)->first();
 
             $this->validate([
-                'name' => ['required','string', 'min:3','max:50'],
+                'name'     => ['required','string', 'min:3','max:50'],
+                'priority' => ['required', Rule::in(array_keys(config('enums.priority')))],
             ]);      
 
             $update = $category->update([
-                'name'   => $this->name,
-                'active' => $this->active,
+                'name'     => $this->name,
+                'priority' => $this->priority,
+                'active'   => $this->active,
             ]);
 
             if($update) {

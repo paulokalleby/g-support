@@ -67,6 +67,7 @@
                                 <tr>
                                     <th scope="col">#</th>
                                     <th scope="col">Categoria</th>
+                                    <th scope="col">Prioridade</th>
                                     <th scope="col"></th>
                                 </tr>
                             </thead>
@@ -86,6 +87,9 @@
                                         </td>
                                         <td>
                                             {{ $category->name }}
+                                        </td>
+                                        <td>
+                                            {{ config('enums.priority')[$category->priority] }}
                                         </td>
                                         <td class="text-right">
                                             <button type="button" class="btn btn-sm btn-link"

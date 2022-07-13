@@ -4,6 +4,7 @@ namespace App\Http\Livewire\Admin\Categories;
 
 use App\Models\Category;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
+use Illuminate\Validation\Rule;
 use Livewire\Component;
 
 class CategoriesCreate extends Component
@@ -11,6 +12,7 @@ class CategoriesCreate extends Component
     use LivewireAlert;
     
     public $name;
+    public $priority;
 
     protected $listeners = ['$refresh'];
 
@@ -28,11 +30,13 @@ class CategoriesCreate extends Component
     {
  
         $this->validate([
-            'name' => ['required','string', 'min:3','max:50'],
+            'name'     => ['required','string', 'min:3','max:50'],
+            'priority' => ['required', Rule::in(array_keys(config('enums.priority')))],
         ]);
 
         Category::create([
-            'name' => $this->name,
+            'name'     => $this->name,
+            'priority' => $this->priority,
         ]);
 
         $this->emitTo('admin.categories.categories-index', '$refresh');

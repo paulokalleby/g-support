@@ -14,6 +14,18 @@
                     <small class="form-text text-danger">{{ $message }}</small>
                 @enderror
             </div>
+            <div wire:ignore class="form-group mb-2">
+                <label for="" class="form-control-label">Prioridade</label>
+                <select class="form-control form-control-muted" wire:model.defer="priority">
+                    <option>Selecione uma Prioridade</option>
+                    @foreach (config('enums.priority') as $k => $v)
+                        <option value="{{ $k }}">{{ $v }}</option>
+                    @endforeach
+                </select>
+                @error('priority')
+                    <small class="form-text text-danger">{{ $message }}</small>
+                @enderror
+            </div>
         </div>
 
         <div class="modal-footer pt-0 mt-2">

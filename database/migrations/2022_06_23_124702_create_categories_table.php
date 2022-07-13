@@ -17,6 +17,7 @@ return new class extends Migration
             $table->uuid('id')->primary();
             $table->string('name', 50)->nullable();
             $table->string('description', 255)->nullable();
+            $table->enum('priority',['A', 'B', 'C'])->default('B');
             $table->boolean('active')->default(true);
             $table->timestamps();
         });
