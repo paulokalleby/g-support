@@ -123,7 +123,7 @@
                                             {{ $called->category->name }}
                                         </td>
                                         <td>
-                                            {{ config('nums.priority')[$called->category->priority] }}
+                                            {{ config('enums.priority')[$called->category->priority] }}
                                         </td>
                                         <td>
                                             @if ($called->status == 'pending')
