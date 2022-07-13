@@ -39,7 +39,7 @@
                                         <h5 class="mb-1">{{ $attendance }}</h5>
                                     </div>
                                 </div>
-                                <small>{{ dateTimeToBr($updated) }}</small>
+                                {{--<small>{{ dateTimeToBr($updated) }}</small>--}}
                             </div>
                             @if ($solution)
                                 <p class="text-sm mb-0">{{ $solution }}</p>
