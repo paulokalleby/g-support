@@ -19,7 +19,7 @@ class SupportResource extends JsonResource
             'id'         => $this->id,
             'identify'   => $this->identify,
             'category'   => $this->category->name,
-            'priority'   => config('enums.priority')[$this->priority],
+            'priority'   => config('enums.priority')[$this->category->priority],
             'title'      => $this->title,
             'problem'    => $this->problem,
             'attendance' => $this->attendance->name ?? '',
