@@ -2,7 +2,7 @@
     <div class="modal-content">
 
         <div class="modal-header">
-            <h6 class="modal-title" id="modal-title-default">Nº {{ $identify }}</h6>
+            <h6 class="modal-title" id="modal-title-default">Chamado Nº {{ $identify }}</h6>
             <button type="button" wire:click.prevent="clear" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">×</span>
             </button>
@@ -11,9 +11,7 @@
         <div class="modal-body mb-0 pt-0 pb-3 px-3">
 
             <div class="row">
-                <div class="col-lg-8">
-
-
+                <div class="col-lg-8 border-right">
 
                     <div class="flex-column align-items-start py-2 px-2">
                         <div class="d-flex w-100 justify-content-between">
@@ -41,7 +39,7 @@
                                         <h5 class="mb-1">{{ $attendance }}</h5>
                                     </div>
                                 </div>
-                                {{--<small>{{ dateTimeToBr($updated) }}</small>--}}
+                                <small>{{ dateTimeToBr($updated) }}</small>
                             </div>
                             @if ($solution)
                                 <p class="text-sm mb-0">{{ $solution }}</p>
@@ -84,8 +82,9 @@
 
                 </div>
 
-                <div class="col-lg-4">
+                <div class="col-lg-4 pl-4">
 
+                    <h5 class="text-muted">Linha do Tempo</h5>
                     <div class="timeline timeline-one-side" data-timeline-content="axis"
                         data-timeline-axis-style="dashed">
                     
