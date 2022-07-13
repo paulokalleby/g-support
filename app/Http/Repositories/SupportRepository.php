@@ -50,7 +50,15 @@ class SupportRepository
         $data['requester_id'] = $this->loggedUser()->id;
         $data['status']       = 'pending';
 
-        return $this->entity->create($data);
+        $support = $this->entity->create($data);
+
+        $support->timelines()->create([
+            'label' => 'Aberto',
+            'icon'  => 'fa-comment-alt',
+            'color' => 'warning', 
+        ]);
+
+        return $support;
     }
 
 

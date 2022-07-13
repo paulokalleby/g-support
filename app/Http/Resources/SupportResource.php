@@ -27,6 +27,7 @@ class SupportResource extends JsonResource
             'active'     => $this->active,
             'opened'     => Carbon::make($this->created_at)->format('Y-m-d H:i:s'),
             'updating'   => Carbon::make($this->updated_at)->format('Y-m-d H:i:s'),
+            'timelines'  => TimelineResource::collection($this->timelines),
         ];
     }
 }
