@@ -118,15 +118,9 @@
         @if (auth()->user()->technician == 1)
             <div class="modal-footer pt-0 mt-0">
 
-                @if ($active == 1)
-                <button type="button" wire:click.prevent="clear" class="btn btn-outline-primary" data-dismiss="modal">
-                    Fechar
-                </button>
-                @endif
-
                 @if ($status == 'pending')
                     <button type="button" wire:loading.attr="disabled" wire:click.prevent="toMeet"
-                        class="btn btn-primary ml-auto">
+                        class="btn btn-primary mr-auto">
                         Atender
                         <i wire:loading wire:target="toMeet" class="fas fa-spinner fa-pulse"></i>
                     </button>
@@ -134,7 +128,7 @@
 
                 @if ($status == 'attending' && $attendance_id == auth()->user()->id)
                     <button type="button" wire:loading.attr="disabled" wire:click.prevent="finishing"
-                        class="btn btn-primary ml-auto">
+                        class="btn btn-primary mr-auto">
                         Finalizar
                         <i wire:loading wire:target="finishing" class="fas fa-spinner fa-pulse"></i>
                     </button>
