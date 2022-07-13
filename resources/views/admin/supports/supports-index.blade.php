@@ -92,6 +92,7 @@
                                     <th>Solicitante</th>
                                     <th>Chamado</th>
                                     <th>Categoria</th>
+                                    <th>Prioridade</th>
                                     <th>Status</th>
                                     <th></th>
                                 </tr>
@@ -120,6 +121,9 @@
                                         </td>
                                         <td>
                                             {{ $called->category->name }}
+                                        </td>
+                                        <td>
+                                            {{ config('nums.priority')[$called->category->priority] }}
                                         </td>
                                         <td>
                                             @if ($called->status == 'pending')
