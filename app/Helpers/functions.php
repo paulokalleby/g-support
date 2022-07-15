@@ -40,5 +40,5 @@ function dateToBr($date)
 
 function dateTimeToBr($date)
 {
-    return Carbon::make($date)->format('d/m/Y H:i:s');
+    return Carbon::make($date)->format('d/m/Y H:i');
 }

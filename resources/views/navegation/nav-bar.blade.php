@@ -33,14 +33,14 @@
                         <div class="dropdown-menu dropdown-menu-xl  dropdown-menu-right  py-0 overflow-hidden">
 
                             <div class="px-3 py-3">
-                                <h6 class="text-sm text-muted m-0">Ultimos pedidos <strong class="text-primary">Abertos</strong></h6>
+                                <h6 class="text-sm text-muted m-0">Avaliações pendentes</h6>
                             </div>
 
                             <div class="list-group list-group-flush">
                                 <a href="#!" class="list-group-item list-group-item-action">
                                     <div class="row align-items-center">
                                         <div class="col-auto">
-
+                                            Teste
                                         </div>
                                     </div>
                                 </a>

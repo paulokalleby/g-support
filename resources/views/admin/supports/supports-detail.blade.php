@@ -8,79 +8,102 @@
             </button>
         </div>
 
-        <div class="modal-body mb-0 pt-0 pb-3 px-3">
+        <div class="modal-body mb-0 pt-0 pb-4 px-_">
 
             <div class="row">
-                <div class="col-lg-8 border-right">
+                <div class="col-lg-8">
 
-                    <div class="flex-column align-items-start py-2 px-2">
-                        <div class="d-flex w-100 justify-content-between">
-                            <div>
-                                <div class="d-flex w-100 align-items-center">
-                                    <img src="{{ orImage($avatar_r, 'avatar.jpg') }}" alt="Image placeholder"
-                                        class="avatar avatar-xs mr-2" />
-                                    <h5 class="mb-1">{{ $requester }}</h5>
+
+                    <div class="media media-comment mt-0 mb-3">
+                        <img alt="Image placeholder"
+                            class="avatar avatar-lg media-comment-avatar rounded-circle"
+                            src="{{ orImage($avatar_r, 'avatar.jpg') }}">
+                        <div class="media-body">
+                            <div class="media-comment-text">
+                                <h6 class="h5 mt-0">{{ $requester }}</h6>
+                                <h6 class="h5 mt-0 text-muted">{{ $title }}</h6>
+                                <p class="text-sm lh-160">{{ $problem }}</p>
+                                {{--
+                                <div class="icon-actions">
+                                    <a class="text-success" href="https://api.whatsapp.com/send?1=pt_BR&phone=55{{ $whatsapp }}&text=Chamado:%20{{ $identify }}" target="_blank">
+                                        <i class="fab fa-whatsapp"></i>
+                                    </a>
                                 </div>
+                                ---}}
                             </div>
-                            <a class="text-success" href="https://api.whatsapp.com/send?1=pt_BR&phone=55{{ $whatsapp }}&text=Chamado:%20{{ $identify }}" target="_blank">
-                                <i class="fab fa-whatsapp"></i>
-                            </a>
                         </div>
-                        <h4 class="mt-3 mb-1">{{ $title }}</h4>
-                        <p class="text-sm mb-0">{{ $problem }}</p>
                     </div>
 
-
-                    @if ($status != 'pending')
-                        <div class="flex-column align-items-start py-2 px-2">
+                    @if ($status != 'pending' && $status != 'attending')
+                    <div class="media media-comment mt-0">
+                        <img alt="Image placeholder"
+                            class="avatar avatar-lg media-comment-avatar rounded-circle"
+                            src="{{ orImage($avatar_a, 'avatar.jpg') }}">
+                        <div class="media-body">
+                            <div class="media-comment-text">
+                                <h6 class="h5 mt-0">{{ $attendance }}</h6>
+                                @if ($solution)
+                                    <p class="text-sm lh-160">{{ $solution }}</p>
+                                @endif
+                            </div>
+                        </div>
+                    </div>
+                    @elseif($status == 'attending')
+                        <div class="flex-column align-items-start ml-2">
                             <div class="d-flex w-100 justify-content-between">
                                 <div>
                                     <div class="d-flex w-100 align-items-center">
                                         <img src="{{ orImage($avatar_a, 'avatar.jpg') }}" alt="Image placeholder"
                                             class="avatar avatar-xs mr-2" />
-                                        <h5 class="mb-1">{{ $attendance }}</h5>
+                                        <h5 class="">{{ $attendance }} <small class="text-info">atendendo...</small></h5>
+                                        
                                     </div>
                                 </div>
-                                {{--<small>{{ dateTimeToBr($updated) }}</small>--}}
                             </div>
-                            @if ($solution)
-                                <p class="text-sm mb-0">{{ $solution }}</p>
-                            @endif
                         </div>
                     @endif
-
-                    {{--
-                    <p class="ml-2">
-                        @if ($status == 'pending')
-                            <span class="badge badge-pill badge-warning">
-                                {{ config('enums.status')[$status] }}
-                            </span>
-                        @elseif($status == 'attending')
-                            <span class="badge badge-pill badge-info">
-                                {{ config('enums.status')[$status] }}
-                            </span>
-                        @elseif($status == 'solved')
-                            <span class="badge badge-pill badge-success">
-                                {{ config('enums.status')[$status] }}
-                            </span>
-                        @elseif($status == 'canceled')
-                            <span class="badge badge-pill badge-danger">
-                                {{ config('enums.status')[$status] }}
-                            </span>
-                        @endif
-                    </p>
-                    --}}
 
                     @if ($status == 'attending' && $attendance_id == auth()->user()->id)
-                        <div class="form-group mx-2 mb-0">
-                            <label for="" class="form-control-label">Informe a solução</label>
-                            <textarea class="form-control form-control-muted" style="resize: none" rows="3" wire:model.defer="solution"
-                                placeholder="Descreva o procedimento realizado"></textarea>
-                            @error('solution')
-                                <small class="form-text text-danger">{{ $message }}</small>
-                            @enderror
+                    
+                        <hr />
+                        <div class="media align-items-center">
+                            <img alt="Image placeholder" class="avatar avatar-lg rounded-circle mr-4"
+                                src="{{ orImage($avatar_a, 'avatar.jpg') }}">
+                            <div class="media-body">
+                                <div>
+                                    <textarea class="form-control form-control-muted" style="resize: none" rows="2" wire:model.defer="solution"
+                                        placeholder="Descreva o procedimento realizado"></textarea>
+                                    @error('solution')
+                                        <small class="form-text text-danger">{{ $message }}</small>
+                                    @enderror
+                                </div>
+                            </div>
                         </div>
+
                     @endif
+
+                    @if (auth()->user()->technician == 1)
+
+                        <div class="text-right mt-2">
+                            @if ($status == 'pending')
+                                <button type="button" wire:loading.attr="disabled" wire:click.prevent="toMeet"
+                                    class="btn btn-primary btn-sm ml-auto">
+                                    Iniciar atentimento
+                                    <i wire:loading wire:target="toMeet" class="fas fa-spinner fa-pulse"></i>
+                                </button>
+                            @endif
+
+                            @if ($status == 'attending' && $attendance_id == auth()->user()->id)
+                                <button type="button" wire:loading.attr="disabled" wire:click.prevent="finishing"
+                                    class="btn btn-primary btn-sm ml-auto">
+                                    Finalizar
+                                    <i wire:loading wire:target="finishing" class="fas fa-spinner fa-pulse"></i>
+                                </button>
+                            @endif
+                        </div>
+
+                    @endif
+                    
 
                 </div>
 
@@ -115,28 +138,6 @@
 
             </div>
         </div>
-
-        @if (auth()->user()->technician == 1)
-            <div class="modal-footer pt-0 mt-0">
-
-                @if ($status == 'pending')
-                    <button type="button" wire:loading.attr="disabled" wire:click.prevent="toMeet"
-                        class="btn btn-primary mr-auto">
-                        Atender
-                        <i wire:loading wire:target="toMeet" class="fas fa-spinner fa-pulse"></i>
-                    </button>
-                @endif
-
-                @if ($status == 'attending' && $attendance_id == auth()->user()->id)
-                    <button type="button" wire:loading.attr="disabled" wire:click.prevent="finishing"
-                        class="btn btn-primary mr-auto">
-                        Finalizar
-                        <i wire:loading wire:target="finishing" class="fas fa-spinner fa-pulse"></i>
-                    </button>
-                @endif
-
-            </div>
-        @endif
 
     </div>
 </div>
