@@ -95,7 +95,7 @@
 
                             @if ($status == 'attending' && $attendance_id == auth()->user()->id)
                                 <button type="button" wire:loading.attr="disabled" wire:click.prevent="finishing"
-                                    class="btn btn-primary btn-sm ml-auto mb-3">
+                                    class="btn btn-primary btn-sm ml-auto mt-3">
                                     Finalizar
                                     <i wire:loading wire:target="finishing" class="fas fa-spinner fa-pulse"></i>
                                 </button>
