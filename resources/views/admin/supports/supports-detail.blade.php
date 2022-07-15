@@ -88,7 +88,7 @@
                             @if ($status == 'pending')
                                 <button type="button" wire:loading.attr="disabled" wire:click.prevent="toMeet"
                                     class="btn btn-primary btn-sm ml-auto">
-                                    Iniciar atentimento
+                                    Iniciar Atendimento
                                     <i wire:loading wire:target="toMeet" class="fas fa-spinner fa-pulse"></i>
                                 </button>
                             @endif
@@ -96,7 +96,7 @@
                             @if ($status == 'attending' && $attendance_id == auth()->user()->id)
                                 <button type="button" wire:loading.attr="disabled" wire:click.prevent="finishing"
                                     class="btn btn-primary btn-sm ml-auto mt-2">
-                                    Finalizar
+                                    Finalizar Atendimento
                                     <i wire:loading wire:target="finishing" class="fas fa-spinner fa-pulse"></i>
                                 </button>
                             @endif
