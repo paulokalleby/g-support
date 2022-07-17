@@ -89,7 +89,7 @@
                             @endif
 
                             @if ($status == 'attending' && $attendance_id == auth()->user()->id)
-                                <a class="btn btn-success btn-sm mt-2" href="https://api.whatsapp.com/send?phone=55{{ $whatsapp }}&text=Chamado:%20{{ $identify }}" target="_blank">
+                                <a class="btn btn-success btn-sm mt-2" href="https://api.whatsapp.com/send?phone=55{{ $whatsapp }}&text=*Atendimento%20ao %20Chamado:%20{{ $identify }}*" target="_blank">
                                     <i class="fab fa-whatsapp"></i>
                                 </a>
                                 <button type="button" wire:loading.attr="disabled" wire:click.prevent="finishing"
