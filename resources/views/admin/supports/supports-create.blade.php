@@ -10,9 +10,9 @@
             @if(auth()->user()->technician)
                 <div wire:ignore class="form-group mb-2">
                     <label for="" class="form-control-label">Solicitante</label>
-                    <select class="form-control form-control-muted" wire:model.defer="requester">
-                        <option value="">Selecione um Solicitante</option>
+                    <select class="form-control_ form-control-muted" id="select2" data-toggle="select" wire:model.defer="requester">
                         @foreach ($requesters as $requester)
+                            <option value=""></option>
                             <option value="{{ $requester->id }}">{{ $requester->name }}</option>
                         @endforeach
                     </select>
@@ -67,3 +67,23 @@
         </div>
     </form>
 </div>
+
+
+@push('component-styles')
+   <link href="{{ asset('/vendor/select2/dist/css/select2.min.css') }}" rel="stylesheet" type="text/css">
+   <link href="{{ asset('/vendor/select2/dist/css/select2-bootstrap4.min.css') }}" rel="stylesheet" type="text/css">
+@endpush
+
+@push('component-scripts')
+    <script src="{{ asset('/vendor/select2/dist/js/select2.min.js') }}"></script>
+    <script>
+	$('#select2').select2({
+            theme: 'bootstrap4',
+            placeholder: 'Selecione um Solicitante',
+            language: { noResults: () => "Nenhum resultado",},
+            dropdownParent: $("#modal-create"),
+        }).on('change', function () {
+            @this.set('requester', $(this).val());
+        });
+    </script>
+@endpush

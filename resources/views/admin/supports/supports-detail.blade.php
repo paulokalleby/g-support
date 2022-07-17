@@ -20,16 +20,11 @@
                             src="{{ orImage($avatar_r, 'avatar.jpg') }}">
                         <div class="media-body">
                             <div class="media-comment-text">
-                                <h6 class="h5 mt-0">{{ $requester }}</h6>
+                                <h6 class="h5 mt-0">
+                                    {{ $requester }}
+                                </h6>
                                 <h6 class="h5 mt-0 text-muted">{{ $title }}</h6>
                                 <p class="text-sm lh-160">{{ $problem }}</p>
-                                {{--
-                                <div class="icon-actions">
-                                    <a class="text-success" href="https://api.whatsapp.com/send?1=pt_BR&phone=55{{ $whatsapp }}&text=Chamado:%20{{ $identify }}" target="_blank">
-                                        <i class="fab fa-whatsapp"></i>
-                                    </a>
-                                </div>
-                                ---}}
                             </div>
                         </div>
                     </div>
@@ -94,6 +89,9 @@
                             @endif
 
                             @if ($status == 'attending' && $attendance_id == auth()->user()->id)
+                                <a class="btn btn-success btn-sm mt-2" href="https://api.whatsapp.com/send?phone=55{{ $whatsapp }}&text=Chamado:%20{{ $identify }}" target="_blank">
+                                    <i class="fab fa-whatsapp"></i>
+                                </a>
                                 <button type="button" wire:loading.attr="disabled" wire:click.prevent="finishing"
                                     class="btn btn-primary btn-sm ml-auto mt-2">
                                     Finalizar Atendimento
